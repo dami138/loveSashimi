@@ -1,0 +1,6 @@
+
+train: ../data/images/train
+val: ../data/images/valid
+
+nc: 5
+names: ['Rockfish','Flatfish','tuna','salmon','mullet']
