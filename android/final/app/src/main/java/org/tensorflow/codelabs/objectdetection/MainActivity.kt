@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
+//모델 절대주소를 얻는 함수
     fun assetFilePath(context: Context, assetName: String): String {
         val file = File(context.filesDir, assetName)
         if (file.exists() && file.length() > 0) {
@@ -134,13 +134,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             return file.absolutePath
         }
     }
-
+    
+    
+// 모델 불러와 이미지 입력
     private fun runObjectDetection(bitmap: Bitmap) {
         val mModule = LiteModuleLoader.load(assetFilePath(getApplicationContext(), "test.ptl"));
-
-
         val resizedBitmap = Bitmap.createScaledBitmap(bitmap, PrePostProcessor.mInputWidth, PrePostProcessor.mInputHeight, true);
-        val  inputTensor = TensorImageUtils.bitmapToFloat32Tensor(resizedBitmap, PrePostProcessor.NO_MEAN_RGB, PrePostProcessor.NO_STD_RGB);
+        val inputTensor = TensorImageUtils.bitmapToFloat32Tensor(resizedBitmap, PrePostProcessor.NO_MEAN_RGB, PrePostProcessor.NO_STD_RGB);
         val outputTuple = mModule.forward(IValue.from(inputTensor)).toTuple();
         val outputTensor = outputTuple[0].toTensor()
         val outputs = outputTensor.getDataAsFloatArray();
@@ -149,7 +149,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         drawDetectionResult(bitmap, outputs)
     }
 
-
+//불러온 이미지를 이미지 뷰에 출력 후 runObjectDetection호출
     private fun setViewAndDetect(bitmap: Bitmap) {
         // Display capture image
 
@@ -162,10 +162,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         lifecycleScope.launch(Dispatchers.Default) { runObjectDetection(bitmap) }
     }
 
-    /**
-     * getCapturedImage():
-     *      Decodes and crops the captured image from camera.
-     */
+//카메라로 찍은 이미지를 불러온 후 비트맵으로 변경 후 이미지 뷰에 맞게 스케일 조절 
+//스케일 조절시 이상하게 이미지가 회전됨
+//ExifInterface 함수를 사용해 이미지 파일에 접근하여 이미지 파일의 정보를 불러와 원본 이미지에 맞게 회전
+
     private fun getCapturedImage(): Bitmap {
         // Get the dimensions of the View
         val targetW: Int = inputImageView.width
@@ -211,15 +211,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    /**
-     * getSampleImage():
-     *      Get image form drawable and convert to bitmap.
-     */
+//drawable에 있는 이미지의 주소를 불러오기위한 함수
     open fun getURLForResource(resourceId: Int): String {
         //use BuildConfig.APPLICATION_ID instead of R.class.getPackage().getName() if both are not same
         return Uri.parse("android.resource://" + R::class.java.getPackage().name + "/" + resourceId).toString()
     }
 
+// 셈플이미지를 모델에 입력할 때 사용
+// 굳이 사용할 필요 없으나 이미 저장된 파일을 불러올 때 사용할 수 도 있음
+// 입력시 출력이미지가 회전되어버려 위의 함수를 사용해 원본과 같이 바꾸어 주어야 할 것 같음
 
     private fun getSampleImage(drawable: Int): Bitmap {
         val bitmap = BitmapFactory.decodeResource(resources, drawable, BitmapFactory.Options().apply {
@@ -263,10 +263,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         )
     }
 
-    /**
-     * createImageFile():
-     *     Generates a temporary image file for the Camera app to write to.
-     */
+//사진을 찍을 시 임시파일에 저장해 주는 함수 같음
+
     @Throws(IOException::class)
     private fun createImageFile(): File {
         // Create an image file name
@@ -281,11 +279,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             currentPhotoPath = absolutePath
         }
     }
-
-    /**
-     * dispatchTakePictureIntent():
-     *     Start the Camera app to take a photo.
-     */
+    
+//카메라 모듈 호출 함수 같음
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             // Ensure that there's a camera activity to handle the intent
@@ -311,10 +306,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    /**
-     * drawDetectionResult(bitmap: Bitmap, detectionResults: List<DetectionResult>
-     *      Draw a box around each objects and show the object's name.
-     */
+//이미지에 바운딩 박스와 라벨을 그려주는 함수
+//바운딩 박스가 2개 씩 그려지는 것 같음
+//for문이나 return된 이미지를 다른 곳에서 사용하는 듯 
+
+//모델 아웃풋이 FloatArray로 출력되는데 0:x, 1:y, 2:w, 3:h, 4:아마 객체 중 가장 큰 점수, 5~9:객 객체의 점수 
+//아마 x,y는 객체의 중앙 픽셀 그래서 전체 픽셀 수 만큼 for문을 
     private fun drawDetectionResult(
         bitmap: Bitmap,
         outputs: FloatArray
