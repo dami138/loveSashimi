@@ -326,9 +326,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val pen = Paint()
         pen.textAlign = Paint.Align.LEFT
 
-        val mOutputRow = 25200
-        val mOutputColumn = 10
-        val mThreshold = 0.45
+
 
 
 
@@ -338,35 +336,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val ivScaleY = inputImageView.height.toFloat() / bitmap.getHeight();
 
 
+        val results = PrePostProcessor.outputsToNMSPredictions(outputs, imgScaleX, imgScaleY, ivScaleX, ivScaleY,0.toFloat(),0.toFloat());
 
-        for ( i in 0 until(mOutputRow)) {
-            if (outputs[i* mOutputColumn +4] > mThreshold) {
 
-                val x = outputs[i* mOutputColumn];
-                val y = outputs[i* mOutputColumn +1];
-                val w = outputs[i* mOutputColumn +2];
-                val h = outputs[i* mOutputColumn +3];
 
-                val left =  imgScaleX * (x - w/2);
-                val top =  imgScaleY * (y - h/2);
-                val right =  imgScaleX * (x + w/2);
-                val bottom = imgScaleY * (y + h/2);
-
-                var max = outputs[i* mOutputColumn +5];
-                var cls = 0;
-                for (j in 0 until(mOutputColumn -5)) {
-                    if (outputs[i* mOutputColumn +5+j] > max) {
-                        max = outputs[i* mOutputColumn +5+j];
-                        cls = j;
-
-                    }
-                }
+        for(i in 0 until(results.size)){
                 pen.color = Color.RED
                 pen.strokeWidth = 8F
                 pen.style = Paint.Style.STROKE
-                val box = RectF(ivScaleX*left,top*ivScaleY,ivScaleX*right,ivScaleY*bottom)
 
-                canvas.drawRect(box, pen)
+
+                canvas.drawRect(results[i].rect, pen)
 
 
                 val tagSize = Rect(0, 0, 0, 0)
@@ -377,20 +357,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 pen.strokeWidth = 2F
                 val label = arrayOf("우럭", "광어", "참치", "연어", "밀치")
                 pen.textSize = MAX_FONT_SIZE
-                pen.getTextBounds(label[cls], 0, label[cls].length, tagSize)
-                val fontSize: Float = pen.textSize * box.width() / tagSize.width()
+                pen.getTextBounds(label[results[i].classIndex], 0, label[results[i].classIndex].length, tagSize)
+                val fontSize: Float = pen.textSize * results[i].rect.width() / tagSize.width()
 
                 // adjust the font size so texts are inside the bounding box
                 if (fontSize < pen.textSize) pen.textSize = fontSize
 
-                var margin = (box.width() - tagSize.width()) / 2.0F
+                var margin = (results[i].rect.width() - tagSize.width()) / 2.0F
                 if (margin < 0F) margin = 0F
                 canvas.drawText(
-                    label[cls], box.left + margin,
-                    box.top + tagSize.height().times(1F), pen
+                    label[results[i].classIndex], results[i].rect.left + margin,
+                    results[i].rect.top + tagSize.height().times(1F), pen
                 )
             }
-        }
+
         inputImageView.setImageBitmap(outputBitmap)
         tvPlaceholder.visibility = View.INVISIBLE
         return outputBitmap
