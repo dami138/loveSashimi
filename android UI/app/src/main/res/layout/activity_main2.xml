@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity2">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/rawfish2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="사랑회요"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_gravity="bottom"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="광어"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_below="@id/name"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/rawfish2" />
+
+        <TextView
+            android:id="@+id/month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            android:text="1~3월"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/month"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:layout_marginBottom="5dp"
+            android:scrollbars="vertical"
+            android:text="가\n나\n다\n라\n마\n바\n사\n아\n자\n차\n카\n타\n파\n하\n\n\n123\n456\n\n789"
+            android:textSize="15dp" />
+
+    </RelativeLayout>
+
+</FrameLayout>
