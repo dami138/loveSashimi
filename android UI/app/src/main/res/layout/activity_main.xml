@@ -33,38 +33,50 @@
             android:src="@drawable/camera" />
     </RelativeLayout>
 
-    <android.widget.Button
-        android:id="@+id/rec_btn"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="152dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/rawfish1"
-        android:gravity="bottom|right"
-        android:shadowColor="@color/white"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="2"
-        android:text="시즌 레시피"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
+        android:layout_height="152dp">
+        <ImageView
+            android:id="@+id/rec_btn"
+            android:layout_width="match_parent"
+            android:layout_height="152dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/rawfish1"
+            android:scaleType="fitXY"
+            android:shadowColor="@color/white"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="16dp"
+            android:text="제철 회"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold">
+
+        </TextView>
+    </FrameLayout>
+
 
     <SearchView
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="41dp"
+        android:layout_gravity="center"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginTop="20dp"
-        android:layoutDirection="rtl"
-        android:iconifiedByDefault="true"
+        android:layout_marginRight="16dp"
         android:background="@drawable/radius"
-        android:queryHint="회를 입력하세요"
-        android:layout_gravity="center">
-    </SearchView>
+        android:iconifiedByDefault="true"
+        android:layoutDirection="rtl"
+        android:queryHint="회를 입력하세요"></SearchView>
 
     <LinearLayout
         android:layout_width="wrap_content"

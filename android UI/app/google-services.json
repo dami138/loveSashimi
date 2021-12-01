@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "215114609977",
+    "firebase_url": "https://rawfish-d01b2-default-rtdb.firebaseio.com",
+    "project_id": "rawfish-d01b2",
+    "storage_bucket": "rawfish-d01b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215114609977:android:7e3ff870e7edd83e7fe4e8",
+        "android_client_info": {
+          "package_name": "kr.ac.kumoh.s20190541.teamproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215114609977-68mj482abmun16vfheqoaaaf3aqurqe8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2-GDYOwt9k9MIUYU0kNe94o6eZ912g1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215114609977-68mj482abmun16vfheqoaaaf3aqurqe8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215114609977:android:560f536985ca42e27fe4e8",
+        "android_client_info": {
+          "package_name": "kr.ac.kumoh.s20191250.midexam2021"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215114609977-68mj482abmun16vfheqoaaaf3aqurqe8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2-GDYOwt9k9MIUYU0kNe94o6eZ912g1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215114609977-68mj482abmun16vfheqoaaaf3aqurqe8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
