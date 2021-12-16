@@ -8,7 +8,6 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main2.*
 
 class MainActivity2 : AppCompatActivity() {
@@ -40,12 +39,11 @@ class MainActivity2 : AppCompatActivity() {
 
         monthView.text = "제철: " + rawFish.get("Season").toString() + "월"
 
-        textView.text = "먹는 방법: " + rawFish.get("HowToEat").toString() + '\n' + "요리: " + rawFish.get("Cooking").toString() + '\n' + "설명: " + rawFish.get("Description").toString() + '\n' + "효능: " + rawFish.get("Efficacy").toString()
-
-
-
-
-
+        textView.text = rawFish.get("Description") as CharSequence?
+        textView.text = "먹는 방법: " + rawFish.get("HowToEat").toString() + '\n' +
+                "요리: " + rawFish.get("Cooking").toString() + '\n' +
+                "설명: " + rawFish.get("Description").toString() + '\n' +
+                "효능: " + rawFish.get("Efficacy").toString()
 
     }
 }

@@ -38,16 +38,22 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.cameraBtn.setOnClickListener {
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            if (intent.resolveActivity(packageManager) != null) {
-                //val dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                val dir = externalCacheDir
-                val file = File.createTempFile("photo_", ".jpg", dir)
-                val uri = FileProvider.getUriForFile(this, "$packageName.provider", file)
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-                startActivityForResult(intent, REQUEST_CODE_FOR_IMAGE_CAPTURE)
-                photoFile = file
-            }
+//            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//            if (intent.resolveActivity(packageManager) != null) {
+//                //val dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+//                val dir = externalCacheDir
+//                val file = File.createTempFile("photo_", ".jpg", dir)
+//                val uri = FileProvider.getUriForFile(this, "$packageName.provider", file)
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+//                startActivityForResult(intent, REQUEST_CODE_FOR_IMAGE_CAPTURE)
+//                photoFile = file
+//            }
+
+
+            // 두번째 화면 테스트
+            val intent = Intent(this, CamActivity::class.java)
+
+            startActivity(intent)
         }
 
         //두번째 화면으로 값을 전달하기 위한 해쉬맵
@@ -81,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 
 
         rec_btn.setOnClickListener {
-
+            // 두번째 화면 테스트
             val intent = Intent(this, MainActivity2::class.java)
             //intent.putExtra("mode", "recommend")
 
@@ -93,8 +99,8 @@ class MainActivity : AppCompatActivity() {
 
         // 검색창 기능 구현
         searchView = findViewById(R.id.search)
-
         var check = 0
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 //검색 키워드(query)와 똑같은 Name을 가진 회가 있는지 DB에서 탐색
@@ -115,17 +121,16 @@ class MainActivity : AppCompatActivity() {
                             intent.putExtra("rawFish", rawFish)
                             Log.d(TAG, "체크")
                             startActivity(intent)
-                            check = 0
+
                         }
                         else {
                             Log.d(ContentValues.TAG, "Error getting documents: ")
                             Toast.makeText(this@MainActivity, "해당 회 없음", Toast.LENGTH_LONG).show()
                         }
                     }
-                    //.addOnFailureListener { exception ->
-                    //    Log.d(ContentValues.TAG, "Error getting documents: ", exception)
-                    //    Toast.makeText(this@MainActivity, "No Match found", Toast.LENGTH_LONG).show()
-                    //}
+//                    .addOnFailureListener { exception ->
+//                        Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+//                    }
                 return false
             }
             override fun onQueryTextChange(newText: String): Boolean {
