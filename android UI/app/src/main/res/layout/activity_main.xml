@@ -5,38 +5,170 @@
 
     -<RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent">
 
-    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:typeface="monospace" android:textStyle="bold" android:textSize="30dp" android:textColor="@color/black" android:text="사랑회요" android:layout_marginTop="8dp" android:layout_marginStart="16dp"/>
+    <ImageButton
+        android:id="@+id/camera_btn"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="16dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/camera" />
 
-    <ImageButton android:layout_height="40dp" android:layout_width="40dp" android:layout_marginTop="8dp" android:src="@drawable/camera" android:scaleType="fitCenter" android:background="@android:color/transparent" android:layout_alignParentRight="true" android:layout_marginRight="16dp" android:id="@+id/camera_btn"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/bhsans"
+        android:text="사랑회요"
+        android:textColor="#3D3D3D"
+        android:textSize="26dp"
+        android:textStyle="normal"
+        android:typeface="monospace" />
 
 </RelativeLayout>
 
 
-    -<FrameLayout android:layout_height="152dp" android:layout_width="match_parent">
+    -<FrameLayout
+    android:layout_height="200dp"
+    android:layout_width="match_parent"
+    android:layout_marginTop="4dp">
+    <androidx.cardview.widget.CardView
+        android:layout_height="190dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView android:layout_height="152dp" android:layout_width="match_parent" android:layout_marginTop="8dp" android:src="@drawable/rawfish1" android:scaleType="fitXY" android:layout_marginRight="16dp" android:id="@+id/rec_btn" android:shadowRadius="2" android:shadowDy="1" android:shadowDx="1" android:shadowColor="@color/white" android:layout_marginLeft="16dp"/>
+        <ImageView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/rawfish1"
+            android:id="@+id/rec_btn"/>
+    </androidx.cardview.widget.CardView>
 
-    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:textStyle="bold" android:textSize="20dp" android:textColor="@color/black" android:text="제철 회" android:layout_marginRight="16dp" android:layout_gravity="bottom|right"> </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="12dp"
+        android:text="시즌 레시피"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:shadowRadius="8.0"
+        android:shadowDx="4.0"
+        android:shadowDy="5.0"
+        android:shadowColor="#000000"></TextView>
 
 </FrameLayout>
 
-    <SearchView android:layout_height="41dp" android:layout_width="match_parent" android:layout_marginTop="20dp" android:background="@drawable/radius" android:layout_marginRight="16dp" android:id="@+id/search" android:layout_marginLeft="16dp" android:layout_gravity="center" android:queryHint="회를 입력하세요" android:layoutDirection="rtl" android:iconifiedByDefault="true"/>
+    <SearchView
+        android:layout_height="41dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/radius"
+        android:layout_marginRight="16dp"
+        android:id="@+id/search"
+        android:layout_marginLeft="16dp"
+        android:layout_gravity="center"
+        android:queryHint="회를 입력하세요"
+        android:layoutDirection="rtl"
+        android:iconifiedByDefault="true"/>
 
 
-    -<LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="center_horizontal" android:layout_margin="16dp">
+    -<LinearLayout
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="16dp">
 
-    <android.widget.Button android:layout_height="190dp" android:layout_width="190dp" android:textStyle="bold" android:textSize="20dp" android:text="9.31" android:id="@+id/diary_btn1" android:gravity="bottom|right"/>
+    <android.widget.Button
+        android:layout_height="184dp"
+        android:layout_width="184dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="9.31"
+        android:textColor="#FFFFFF"
+        android:id="@+id/diary_btn1"
+        android:gravity="bottom|right"
+        />
 
-    <android.widget.Button android:layout_height="190dp" android:layout_width="190dp" android:textStyle="bold" android:textSize="20dp" android:text="10.21" android:id="@+id/diary_btn2" android:gravity="bottom|right"/>
+    <android.widget.Button
+        android:layout_height="184dp"
+        android:layout_width="184dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="10.21"
+        android:textColor="#FFFFFF"
+        android:id="@+id/diary_btn2"
+        android:gravity="bottom|right"/>
 
-</LinearLayout>
+    </LinearLayout>
 
 
-    -<LinearLayout android:orientation="horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_gravity="center_horizontal">
+    -<LinearLayout
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center_horizontal">
 
-    <android.widget.Button android:layout_height="190dp" android:layout_width="190dp" android:textStyle="bold" android:textSize="20dp" android:text="test" android:id="@+id/diary_btn3" android:gravity="bottom|right"/>
+        <android.widget.Button
+            android:layout_height="184dp"
+            android:layout_width="184dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="test"
+            android:textColor="#FFFFFF"
+            android:id="@+id/diary_btn3"
+            android:gravity="bottom|right"/>
 
-    <android.widget.Button android:layout_height="190dp" android:layout_width="190dp" android:textStyle="bold" android:textSize="20dp" android:text="test" android:id="@+id/diary_btn4" android:gravity="bottom|right"/>
+        <android.widget.Button
+            android:layout_height="184dp"
+            android:layout_width="184dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="test"
+            android:textColor="#FFFFFF"
+            android:id="@+id/diary_btn4"
+            android:gravity="bottom|right"/>
+
+    </LinearLayout>
+
+    -<LinearLayout
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center_horizontal">
+
+    <android.widget.Button
+        android:layout_height="184dp"
+        android:layout_width="184dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="test"
+        android:textColor="#FFFFFF"
+        android:id="@+id/diary_btn5"
+        android:gravity="bottom|right"/>
+
+    <android.widget.Button
+        android:layout_height="184dp"
+        android:layout_width="184dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="test"
+        android:textColor="#FFFFFF"
+        android:id="@+id/diary_btn6"
+        android:gravity="bottom|right"/>
 
 </LinearLayout>
 
