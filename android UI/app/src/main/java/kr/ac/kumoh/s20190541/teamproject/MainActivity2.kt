@@ -32,9 +32,6 @@ class MainActivity2 : AppCompatActivity() {
 
         }
 
-        //todo
-        // Efficacy(효능) Cooking(요리) HowToEat(먹는방법) 추가하기
-
         //화면에 정보 띄우기
         nameView.text = rawFish.get("Name") as CharSequence?
 
@@ -43,7 +40,7 @@ class MainActivity2 : AppCompatActivity() {
 
         monthView.text = "제철: " + rawFish.get("Season").toString() + "월"
 
-        textView.text = rawFish.get("Description") as CharSequence?
+        textView.text = "먹는 방법: " + rawFish.get("HowToEat").toString() + '\n' + "요리: " + rawFish.get("Cooking").toString() + '\n' + "설명: " + rawFish.get("Description").toString() + '\n' + "효능: " + rawFish.get("Efficacy").toString()
 
 
 

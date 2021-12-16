@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
 
         rec_btn.setOnClickListener {
-            // 두번째 화면 테스트
+
             val intent = Intent(this, MainActivity2::class.java)
             //intent.putExtra("mode", "recommend")
 
@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity() {
         // 검색창 기능 구현
         searchView = findViewById(R.id.search)
 
+        var check = 0
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 //검색 키워드(query)와 똑같은 Name을 가진 회가 있는지 DB에서 탐색
@@ -103,24 +104,28 @@ class MainActivity : AppCompatActivity() {
                         for (document in documents) {
                             rawFish = document.data as HashMap<String, Any>
                             Log.d(TAG, "검색기능"+rawFish)
+                            check = 1
                         }
-                        if (rawFish.size != 0) {
+                        if (check == 1 && rawFish.size != 0) {
                             // 두번째 화면
                             val intent = Intent(this@MainActivity, MainActivity2::class.java)
                             //intent.putExtra("mode", "search")
 
                             // 선택된 회들 intent로 두번째 화면에 보내기
                             intent.putExtra("rawFish", rawFish)
-
+                            Log.d(TAG, "체크")
                             startActivity(intent)
-
-                        } else {
-                            Toast.makeText(this@MainActivity, "No Match found", Toast.LENGTH_LONG).show()
+                            check = 0
+                        }
+                        else {
+                            Log.d(ContentValues.TAG, "Error getting documents: ")
+                            Toast.makeText(this@MainActivity, "해당 회 없음", Toast.LENGTH_LONG).show()
                         }
                     }
-                    .addOnFailureListener { exception ->
-                        Log.d(ContentValues.TAG, "Error getting documents: ", exception)
-                    }
+                    //.addOnFailureListener { exception ->
+                    //    Log.d(ContentValues.TAG, "Error getting documents: ", exception)
+                    //    Toast.makeText(this@MainActivity, "No Match found", Toast.LENGTH_LONG).show()
+                    //}
                 return false
             }
             override fun onQueryTextChange(newText: String): Boolean {

@@ -44,7 +44,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:src="@drawable/rawfish1"
+            android:background="#aaa"
             android:scaleType="fitXY"
             android:shadowColor="@color/white"
             android:shadowDx="1"
