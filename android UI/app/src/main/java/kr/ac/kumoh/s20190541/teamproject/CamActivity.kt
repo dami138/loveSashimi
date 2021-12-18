@@ -42,13 +42,11 @@ import kotlinx.coroutines.launch
 import org.pytorch.IValue
 import org.pytorch.LiteModuleLoader
 import org.pytorch.torchvision.TensorImageUtils
-import org.w3c.dom.Text
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.max
 import kotlin.math.min
 
@@ -57,7 +55,7 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val TAG = "TFLite - ODT"
         const val REQUEST_IMAGE_CAPTURE: Int = 1
-        private const val MAX_FONT_SIZE = 96F
+        private const val MAX_FONT_SIZE = 70F
     }
 
     private lateinit var captureImageFab: Button
@@ -233,29 +231,7 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
         })
 
 
-//        val exifInterface = ExifInterface(getURLForResource(drawable))
-//        val orientation = exifInterface.getAttributeInt(
-//            ExifInterface.TAG_ORIENTATION,
-//            ExifInterface.ORIENTATION_ROTATE_90
-//        )
 
-//        return when (orientation) {
-//            ExifInterface.ORIENTATION_ROTATE_90 -> {
-//                rotateImage(bitmap, 90f)
-//                Bitmap.createScaledBitmap(bitmap, inputImageView.width, inputImageView.height, true)
-//            }
-//            ExifInterface.ORIENTATION_ROTATE_180 -> {
-//                rotateImage(bitmap, 180f)
-//                Bitmap.createScaledBitmap(bitmap, inputImageView.width, inputImageView.height, true)
-//            }
-//            ExifInterface.ORIENTATION_ROTATE_270 -> {
-//                rotateImage(bitmap, 270f)
-//                Bitmap.createScaledBitmap(bitmap, inputImageView.width, inputImageView.height, true)
-//            }
-//            else -> {
-//                Bitmap.createScaledBitmap(bitmap, inputImageView.width, inputImageView.height, true)
-//            }
-//        }
         return Bitmap.createScaledBitmap(bitmap, inputImageView.width, inputImageView.height, true)
 }
 
@@ -288,15 +264,7 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
             // Save a file: path for use with ACTION_VIEW intents
             currentPhotoPath = absolutePath
         }
-//
-//        return File.createTempFile(
-//            "JPEG_${timeStamp}_", /* prefix */
-//            ".jpg", /* suffix */
-//            storageDir /* directory */
-//        ).apply {
-//            // Save a file: path for use with ACTION_VIEW intents
-//            currentPhotoPath = absolutePath
-//        }
+
     }
 
 
@@ -342,6 +310,7 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
 
         val outputBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
         val canvas = Canvas(outputBitmap)
+        canvas.drawColor(Color.GRAY, PorterDuff.Mode.MULTIPLY);
         val pen = Paint()
         pen.textAlign = Paint.Align.LEFT
 
@@ -359,21 +328,21 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
         val labels =  ArrayList<String>()
 
         for(i in 0 until(results.size)){
-                pen.color = Color.RED
-                pen.strokeWidth = 8F
+                pen.color = Color.WHITE
+                pen.strokeWidth = 7F
                 pen.style = Paint.Style.STROKE
 
 
-                canvas.drawRect(results[i].rect, pen)
+                canvas.drawRoundRect(results[i].rect, 80F, 80F, pen)
 
 
                 val tagSize = Rect(0, 0, 0, 0)
 
             // calculate the right font size
                 pen.style = Paint.Style.FILL_AND_STROKE
-                pen.color = Color.YELLOW
+                pen.color = Color.WHITE
                 pen.strokeWidth = 2F
-                val label = arrayOf("우럭", "광어", "참다랑어(참치)", "연어", "숭어(밀치)")
+                val label = arrayOf("우럭", "광어", "참치", "연어", "밀치")
 
                 if (label[results[i].classIndex] !in labels){
                     labels.add(label[results[i].classIndex])
@@ -389,8 +358,8 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
                 var margin = (results[i].rect.width() - tagSize.width()) / 2.0F
                 if (margin < 0F) margin = 0F
                 canvas.drawText(
-                    label[results[i].classIndex], results[i].rect.left + margin,
-                    results[i].rect.top + tagSize.height().times(1F), pen
+                    label[results[i].classIndex], results[i].rect.left + margin - 6,
+                    results[i].rect.top + tagSize.height().times(1F) + 13, pen
                 )
             }
 

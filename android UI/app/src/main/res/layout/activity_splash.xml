@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_bg"
+    android:background="@drawable/splash_background"
     tools:context=".SplashActivity">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="40dp"
-        android:textColor="#F0F0F0"
+        android:textColor="#FFFFFF"
         android:fontFamily="@font/bhsans"
         android:text="사\n랑\n회\n요\n.."
         app:layout_constraintTop_toTopOf="parent"

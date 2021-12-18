@@ -1,6 +1,7 @@
 package kr.ac.kumoh.s20190541.teamproject;
 
 import android.graphics.Rect;
+import android.graphics.RectF;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,9 +11,9 @@ import java.util.Comparator;
 class Result {
     int classIndex;
     Float score;
-    Rect rect;
+    RectF rect;
 
-    public Result(int cls, Float output, Rect rect) {
+    public Result(int cls, Float output, RectF rect) {
         this.classIndex = cls;
         this.score = output;
         this.rect = rect;
@@ -95,7 +96,7 @@ public class PrePostProcessor {
     /**
      Computes intersection-over-union overlap between two bounding boxes.
      */
-    static float IOU(Rect a, Rect b) {
+    static float IOU(RectF a, RectF b) {
         float areaA = (a.right - a.left) * (a.bottom - a.top);
         if (areaA <= 0.0) return 0.0f;
 
@@ -120,11 +121,6 @@ public class PrePostProcessor {
                 float w = outputs[i* mOutputColumn +2];
                 float h = outputs[i* mOutputColumn +3];
 
-                float left = imgScaleX * (x - w/2);
-                float top = imgScaleY * (y - h/2);
-                float right = imgScaleX * (x + w/2);
-                float bottom = imgScaleY * (y + h/2);
-
                 float max = outputs[i* mOutputColumn +5];
                 int cls = 0;
                 for (int j = 0; j < mOutputColumn -5; j++) {
@@ -134,7 +130,15 @@ public class PrePostProcessor {
                     }
                 }
 
-                Rect rect = new Rect((int)(startX+ivScaleX*left), (int)(startY+top*ivScaleY), (int)(startX+ivScaleX*right), (int)(startY+ivScaleY*bottom));
+                w =  110;
+                h = 45;
+
+                float left = imgScaleX * (x - w/2);
+                float top = imgScaleY * (y - h/2);
+                float right = imgScaleX * (x + w/2);
+                float bottom = imgScaleY * (y + h/2);
+
+                RectF rect = new RectF((startX+ivScaleX*left),(startY+top*ivScaleY),(startX+ivScaleX*right),(startY+ivScaleY*bottom));
                 Result result = new Result(cls, outputs[i*mOutputColumn+4], rect);
                 results.add(result);
             }
