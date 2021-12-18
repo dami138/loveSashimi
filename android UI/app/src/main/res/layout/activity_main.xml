@@ -15,10 +15,10 @@
 
     <ImageButton
         android:id="@+id/camera_btn"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="16dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
@@ -99,7 +99,8 @@
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:layout_marginTop="16dp">
+    android:layout_marginTop="16dp"
+        >
 
         <android.widget.Button
             android:id="@+id/diary_btn1"
@@ -111,7 +112,8 @@
             android:text="9.31"
             android:textColor="#FFFFFF"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
 
         <android.widget.Button
             android:background="@drawable/img_meal_three"
@@ -167,7 +169,7 @@
         android:layout_gravity="center_horizontal">
 
         <android.widget.Button
-            android:background="@drawable/img_meal_one"
+            android:background="@drawable/rawfish2"
             android:layout_margin="8dp"
             android:layout_width="170dp"
             android:layout_height="170dp"
@@ -183,7 +185,7 @@
             android:layout_width="170dp"
             android:layout_height="170dp"
             android:layout_margin="8dp"
-            android:background="@drawable/second"
+            android:background="@drawable/img_meal_two"
             android:gravity="bottom|right"
             android:text="8.21"
             android:textColor="#FFFFFF"

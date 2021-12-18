@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CamActivity">
+    tools:context=".CamActivity"
+    android:background="#3D3D3D">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -16,9 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/tv_description"
+            android:text="AI Ready !"
             android:textAlignment="center"
-            android:textSize="40sp" />
+            android:textSize="30sp"
+            android:textColor="#FFFFFF"/>
 
         <ImageView
             android:id="@+id/imageView"
@@ -26,7 +28,8 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:contentDescription="@null"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            />
     </FrameLayout>
 
     <TextView
@@ -37,7 +40,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:text="@string/tv_placeholder" />
+        android:text="" />
 
     <LinearLayout
         android:id="@+id/llSampleImage"
@@ -51,17 +54,17 @@
 
     <Button
         android:id="@+id/captureImageFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center|bottom"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:drawableLeft="@drawable/ic_camera"
-        android:text="@string/tv_take_photo"
-        android:textAllCaps="false" />
+        android:background="@drawable/main2_radius"
+        android:text="+ 새로운 사진 촬영"
+        android:textAllCaps="false"
+        android:textColor="#888888"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:visibility="visible" />
 
 </RelativeLayout>
