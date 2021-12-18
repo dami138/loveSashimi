@@ -42,6 +42,7 @@ import kotlinx.coroutines.launch
 import org.pytorch.IValue
 import org.pytorch.LiteModuleLoader
 import org.pytorch.torchvision.TensorImageUtils
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -60,9 +61,6 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var captureImageFab: Button
     private lateinit var inputImageView: ImageView
-    private lateinit var imgSampleOne: ImageView
-    private lateinit var imgSampleTwo: ImageView
-    private lateinit var imgSampleThree: ImageView
     private lateinit var tvPlaceholder: TextView
     private lateinit var currentPhotoPath: String
 
@@ -73,16 +71,9 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
 
         captureImageFab = findViewById(R.id.captureImageFab)
         inputImageView = findViewById(R.id.imageView)
-        imgSampleOne = findViewById(R.id.imgSampleOne)
-        imgSampleTwo = findViewById(R.id.imgSampleTwo)
-        imgSampleThree = findViewById(R.id.imgSampleThree)
         tvPlaceholder = findViewById(R.id.tvPlaceholder)
 
         captureImageFab.setOnClickListener(this)
-        imgSampleOne.setOnClickListener(this)
-        imgSampleTwo.setOnClickListener(this)
-        imgSampleThree.setOnClickListener(this)
-
 
     }
 
@@ -107,15 +98,6 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
                 } catch (e: ActivityNotFoundException) {
                     Log.e(TAG, e.message.toString())
                 }
-            }
-            R.id.imgSampleOne -> {
-                setViewAndDetect(getSampleImage(R.drawable.img_meal_one))
-            }
-            R.id.imgSampleTwo -> {
-                setViewAndDetect(getSampleImage(R.drawable.img_meal_two))
-            }
-            R.id.imgSampleThree -> {
-                setViewAndDetect(getSampleImage(R.drawable.img_meal_three))
             }
         }
     }
@@ -221,20 +203,6 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
         return Uri.parse("android.resource://" + R::class.java.getPackage().name + "/" + resourceId).toString()
     }
 
-// 셈플이미지를 모델에 입력할 때 사용
-// 굳이 사용할 필요 없으나 이미 저장된 파일을 불러올 때 사용할 수 도 있음
-// 입력시 출력이미지가 회전되어버려 위의 함수를 사용해 원본과 같이 바꾸어 주어야 할 것 같음
-
-    private fun getSampleImage(drawable: Int): Bitmap {
-        val bitmap = BitmapFactory.decodeResource(resources, drawable, BitmapFactory.Options().apply {
-            inMutable = true
-        })
-
-
-
-        return Bitmap.createScaledBitmap(bitmap, inputImageView.width, inputImageView.height, true)
-}
-
 
     private fun rotateImage(source: Bitmap, angle: Float): Bitmap {
         val matrix = Matrix()
@@ -251,10 +219,8 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
     private fun createImageFile(): File {
         // Create an image file name
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        //todo
         val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        Toast.makeText(this, storageDir.toString(), Toast.LENGTH_LONG).show()
-        Log.d(TAG, "hi" + storageDir.toString())
+
 
 
         return File(
@@ -391,6 +357,15 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
 
                         // 선택된 회들 intent로 두번째 화면에 보내기
                         intent.putExtra("rawFish", rawFish)
+
+
+                        //비트맵 이미지 보내기
+                        var stream = ByteArrayOutputStream()
+                        var resize = Bitmap.createScaledBitmap(outputBitmap, 500, 500, false)
+                        resize.compress(Bitmap.CompressFormat.JPEG,100,stream)
+
+
+                        intent.putExtra("output",stream.toByteArray())
 
                         startActivity(intent)
 

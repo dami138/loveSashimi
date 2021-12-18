@@ -1,6 +1,8 @@
 package kr.ac.kumoh.s20190541.teamproject
 
 import android.content.ContentValues.TAG
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
@@ -20,6 +22,7 @@ class MainActivity2 : AppCompatActivity() {
 
         var nameView = findViewById(R.id.name) as TextView
         var monthView = findViewById(R.id.month) as TextView
+        val resultImgView = findViewById(R.id.resultImg) as ImageView
 
         // intent 데이터 받아오기
 
@@ -29,6 +32,13 @@ class MainActivity2 : AppCompatActivity() {
             Log.d(TAG, "두번째 화면"+ intent.getSerializableExtra("rawFish"))
             rawFish = intent.getSerializableExtra("rawFish") as HashMap<String, Any>
 
+        }
+
+        // 뒷배경 사진 변경
+        if (intent.hasExtra("output")) {
+            val byteArr = intent.getByteArrayExtra("output") as ByteArray
+            val bitmap = BitmapFactory.decodeByteArray(byteArr, 0, byteArr.size)
+            resultImgView.setImageBitmap(bitmap)
         }
 
         //화면에 정보 띄우기

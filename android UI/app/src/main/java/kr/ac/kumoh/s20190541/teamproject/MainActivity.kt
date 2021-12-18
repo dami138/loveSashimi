@@ -12,6 +12,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.ImageView
 import android.widget.SearchView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
@@ -19,6 +20,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import kr.ac.kumoh.s20190541.teamproject.databinding.ActivityMainBinding
+import org.w3c.dom.Text
 import java.io.File
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -38,26 +40,13 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.cameraBtn.setOnClickListener {
-//            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//            if (intent.resolveActivity(packageManager) != null) {
-//                //val dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-//                val dir = externalCacheDir
-//                val file = File.createTempFile("photo_", ".jpg", dir)
-//                val uri = FileProvider.getUriForFile(this, "$packageName.provider", file)
-//                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-//                startActivityForResult(intent, REQUEST_CODE_FOR_IMAGE_CAPTURE)
-//                photoFile = file
-//            }
-
-
-            // 두번째 화면 테스트
             val intent = Intent(this, CamActivity::class.java)
-
             startActivity(intent)
         }
 
         //두번째 화면으로 값을 전달하기 위한 해쉬맵
         var rawFish = HashMap<String,Any>()
+        var seasonFish = HashMap<String,Any>()
 
         //오늘은 몇월인지 계산
         val current = LocalDate.now()
@@ -73,8 +62,12 @@ class MainActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    rawFish = document.data as HashMap<String, Any>
-                    Log.d(TAG, "제철 회 추천기능"+rawFish)
+                    seasonFish = document.data as HashMap<String, Any>
+                    //Log.d(TAG, "제철 회 추천기능"+seasonFish)
+
+                    var textView = findViewById(R.id.seasonText) as TextView
+
+                    textView.text= "제철 회: "+  document.get("Name") as CharSequence?
 
                     //사진 변경
                     Glide.with(this).load("${document.getData().get("Image")}")
@@ -92,7 +85,7 @@ class MainActivity : AppCompatActivity() {
             //intent.putExtra("mode", "recommend")
 
             // 선택된 회들 intent로 두번째 화면에 보내기
-            intent.putExtra("rawFish", rawFish)
+            intent.putExtra("rawFish", seasonFish)
 
             startActivity(intent)
         }

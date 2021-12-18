@@ -63,12 +63,13 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
+        android:id="@+id/seasonText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="12dp"
-        android:text="시즌 레시피"
+        android:text="제철 회"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -93,91 +94,102 @@
         android:iconifiedByDefault="true"/>
 
 
-    -<LinearLayout
+    <LinearLayout
     android:orientation="horizontal"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:layout_gravity="center_horizontal"
     android:layout_marginTop="16dp">
 
-    <android.widget.Button
-        android:layout_height="184dp"
-        android:layout_width="184dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:text="9.31"
-        android:textColor="#FFFFFF"
-        android:id="@+id/diary_btn1"
-        android:gravity="bottom|right"
-        />
+        <android.widget.Button
+            android:id="@+id/diary_btn1"
+            android:background="@drawable/first"
+            android:layout_margin="8dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:gravity="bottom|right"
+            android:text="9.31"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-    <android.widget.Button
-        android:layout_height="184dp"
-        android:layout_width="184dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:text="10.21"
-        android:textColor="#FFFFFF"
-        android:id="@+id/diary_btn2"
-        android:gravity="bottom|right"/>
+        <android.widget.Button
+            android:background="@drawable/img_meal_three"
+            android:layout_margin="8dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="10.21"
+            android:textColor="#FFFFFF"
+            android:id="@+id/diary_btn2"
+            android:gravity="bottom|right"/>
 
     </LinearLayout>
 
 
-    -<LinearLayout
+    <LinearLayout
     android:orientation="horizontal"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:layout_gravity="center_horizontal">
 
         <android.widget.Button
-            android:layout_height="184dp"
-            android:layout_width="184dp"
+            android:background="@drawable/img_meal_one"
+            android:layout_margin="8dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:text="test"
+            android:text="9.12"
             android:textColor="#FFFFFF"
             android:id="@+id/diary_btn3"
             android:gravity="bottom|right"/>
 
         <android.widget.Button
-            android:layout_height="184dp"
-            android:layout_width="184dp"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="test"
-            android:textColor="#FFFFFF"
             android:id="@+id/diary_btn4"
-            android:gravity="bottom|right"/>
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/second"
+            android:gravity="bottom|right"
+            android:text="8.21"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-    -<LinearLayout
-    android:orientation="horizontal"
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:layout_gravity="center_horizontal">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal">
 
-    <android.widget.Button
-        android:layout_height="184dp"
-        android:layout_width="184dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:text="test"
-        android:textColor="#FFFFFF"
-        android:id="@+id/diary_btn5"
-        android:gravity="bottom|right"/>
+        <android.widget.Button
+            android:background="@drawable/img_meal_one"
+            android:layout_margin="8dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="9.12"
+            android:textColor="#FFFFFF"
+            android:id="@+id/diary_btn5"
+            android:gravity="bottom|right"/>
 
-    <android.widget.Button
-        android:layout_height="184dp"
-        android:layout_width="184dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:text="test"
-        android:textColor="#FFFFFF"
-        android:id="@+id/diary_btn6"
-        android:gravity="bottom|right"/>
+        <android.widget.Button
+            android:id="@+id/diary_btn6"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/second"
+            android:gravity="bottom|right"
+            android:text="8.21"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
