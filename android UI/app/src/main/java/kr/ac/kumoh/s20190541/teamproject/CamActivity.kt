@@ -57,7 +57,6 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val TAG = "TFLite - ODT"
         const val REQUEST_IMAGE_CAPTURE: Int = 2
-        private const val MAX_FONT_SIZE = 70F
     }
 
     private lateinit var captureImageFab: Button
@@ -330,7 +329,7 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
 
         for(i in 0 until(results.size)){
                 pen.color = Color.WHITE
-                pen.strokeWidth = 7F
+                pen.strokeWidth = 3.5F*imgScaleX
                 pen.style = Paint.Style.STROKE
 
 
@@ -342,13 +341,13 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
             // calculate the right font size
                 pen.style = Paint.Style.FILL_AND_STROKE
                 pen.color = Color.WHITE
-                pen.strokeWidth = 2F
+                pen.strokeWidth = 1.5F*imgScaleX
                 val label = arrayOf("우럭", "광어", "참치", "연어", "밀치")
 
                 if (label[results[i].classIndex] !in labels){
                     labels.add(label[results[i].classIndex])
                 }
-
+                val MAX_FONT_SIZE:Float = 30F * imgScaleX
                 pen.textSize = MAX_FONT_SIZE
                 pen.getTextBounds(label[results[i].classIndex], 0, label[results[i].classIndex].length, tagSize)
                 val fontSize: Float = pen.textSize * results[i].rect.width() / tagSize.width()
@@ -359,8 +358,8 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
                 var margin = (results[i].rect.width() - tagSize.width()) / 2.0F
                 if (margin < 0F) margin = 0F
                 canvas.drawText(
-                    label[results[i].classIndex], results[i].rect.left + margin - 6,
-                    results[i].rect.top + tagSize.height().times(1F) + 13, pen
+                    label[results[i].classIndex], results[i].rect.left + margin,
+                    results[i].rect.top + tagSize.height().times(1F)+5F*imgScaleY, pen
                 )
         }
 

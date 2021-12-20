@@ -130,15 +130,13 @@ public class PrePostProcessor {
                     }
                 }
 
-                w =  110;
-                h = 45;
 
                 float left = imgScaleX * (x - w/2);
                 float top = imgScaleY * (y - h/2);
                 float right = imgScaleX * (x + w/2);
                 float bottom = imgScaleY * (y + h/2);
 
-                RectF rect = new RectF((startX+ivScaleX*left),(startY+top*ivScaleY),(startX+ivScaleX*right),(startY+ivScaleY*bottom));
+                RectF rect = new RectF((left),(top),(right),(bottom));
                 Result result = new Result(cls, outputs[i*mOutputColumn+4], rect);
                 results.add(result);
             }
