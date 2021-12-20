@@ -23,6 +23,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.*
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -50,12 +51,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.max
 import kotlin.math.min
-
+import kotlin.collections.ArrayList
 
 class CamActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val TAG = "TFLite - ODT"
-        const val REQUEST_IMAGE_CAPTURE: Int = 1
+        const val REQUEST_IMAGE_CAPTURE: Int = 2
         private const val MAX_FONT_SIZE = 70F
     }
 
@@ -64,17 +65,19 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var tvPlaceholder: TextView
     private lateinit var currentPhotoPath: String
 
+    private val OPEN_GALLERY: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cam)
+
 
         captureImageFab = findViewById(R.id.captureImageFab)
         inputImageView = findViewById(R.id.imageView)
         tvPlaceholder = findViewById(R.id.tvPlaceholder)
 
         captureImageFab.setOnClickListener(this)
-
+        inputImageView.setOnClickListener(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -83,6 +86,38 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
             resultCode == Activity.RESULT_OK
         ) {
             setViewAndDetect(getCapturedImage())
+        }
+        else if(requestCode == OPEN_GALLERY)
+        {
+            if(resultCode == RESULT_OK)
+            {
+                var currentImageUri = data?.data
+
+                try{
+                    currentImageUri?.let {
+                        if(Build.VERSION.SDK_INT < 28) {
+                            val bitmap = MediaStore.Images.Media.getBitmap(
+                                this.contentResolver,
+                                currentImageUri
+                            ).copy(Bitmap.Config.ARGB_8888, true)
+                            setViewAndDetect(bitmap)
+                        } else {
+                            val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
+                            val bitmap = ImageDecoder.decodeBitmap(source).copy(Bitmap.Config.ARGB_8888, true)
+
+                            setViewAndDetect(bitmap)
+                        }
+
+                    }
+                }catch(e: Exception)
+                {
+                    e.printStackTrace()
+                }
+            }
+            else if(resultCode == RESULT_CANCELED)
+            {
+                Toast.makeText(this, "사진 선택 취소", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -98,6 +133,11 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
                 } catch (e: ActivityNotFoundException) {
                     Log.e(TAG, e.message.toString())
                 }
+            }
+            R.id.imageView ->{
+                val intent = Intent(Intent.ACTION_GET_CONTENT)
+                intent.setType("image/*")
+                startActivityForResult(intent, OPEN_GALLERY)
             }
         }
     }
@@ -197,11 +237,6 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-//drawable에 있는 이미지의 주소를 불러오기위한 함수
-    open fun getURLForResource(resourceId: Int): String {
-        //use BuildConfig.APPLICATION_ID instead of R.class.getPackage().getName() if both are not same
-        return Uri.parse("android.resource://" + R::class.java.getPackage().name + "/" + resourceId).toString()
-    }
 
 
     private fun rotateImage(source: Bitmap, angle: Float): Bitmap {
@@ -274,8 +309,8 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
     ): Bitmap {
 
 
-        val outputBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
-        val canvas = Canvas(outputBitmap)
+
+        val canvas = Canvas(bitmap)
         canvas.drawColor(Color.GRAY, PorterDuff.Mode.MULTIPLY);
         val pen = Paint()
         pen.textAlign = Paint.Align.LEFT
@@ -329,8 +364,8 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
                 )
             }
 
-        inputImageView.setImageBitmap(outputBitmap)
-        tvPlaceholder.visibility = View.INVISIBLE
+//        inputImageView.setImageBitmap(bitmap)
+//        tvPlaceholder.visibility = View.INVISIBLE
 
 
         // firebase DB연결
@@ -361,7 +396,7 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
 
                         //비트맵 이미지 보내기
                         var stream = ByteArrayOutputStream()
-                        var resize = Bitmap.createScaledBitmap(outputBitmap, 500, 500, false)
+                        var resize = Bitmap.createScaledBitmap(bitmap, 500, 500, false)
                         resize.compress(Bitmap.CompressFormat.JPEG,100,stream)
 
 
@@ -380,7 +415,7 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
 
         }
 
-        return outputBitmap
+        return bitmap
 
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Team Project</string>
+    <string name="app_name">사랑회요</string>
     <string name="tv_take_photo">Take photo</string>
     <string name="tv_description">Take a new photo</string>
     <string name="tv_placeholder">Object detection</string>
