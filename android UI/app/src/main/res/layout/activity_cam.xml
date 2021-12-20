@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="AI Ready !"
+            android:text="준비 완료\n터치 후 갤러리 선택"
+            android:textStyle="bold"
             android:textAlignment="center"
             android:textSize="30sp"
             android:textColor="#FFFFFF"/>

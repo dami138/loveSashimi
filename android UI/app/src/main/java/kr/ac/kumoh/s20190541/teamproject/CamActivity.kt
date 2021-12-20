@@ -362,10 +362,9 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
                     label[results[i].classIndex], results[i].rect.left + margin - 6,
                     results[i].rect.top + tagSize.height().times(1F) + 13, pen
                 )
-            }
+        }
 
-//        inputImageView.setImageBitmap(bitmap)
-//        tvPlaceholder.visibility = View.INVISIBLE
+
 
 
         // firebase DB연결
@@ -392,7 +391,6 @@ class CamActivity : AppCompatActivity(), View.OnClickListener {
 
                         // 선택된 회들 intent로 두번째 화면에 보내기
                         intent.putExtra("rawFish", rawFish)
-
 
                         //비트맵 이미지 보내기
                         var stream = ByteArrayOutputStream()
